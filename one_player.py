@@ -16,7 +16,7 @@ class OnePlayer(game_modes.GameMode):
 		self.all_sprite_list_boss.add(self.player)
 
 		# thoi gian tao nhung~ thu' xuat. hien trong game 
-		self.enemy_interval = random.randint(constant.ENEMY_MIN, constant.ENEMY_MAX) 
+		self.enemy_interval = random.randint(constant.ENEMY_MIN, constant.ENEMY_MAX) - 100
 		self.power_interval = random.randint(constant.HEALTH_MIN, constant.HEALTH_MAX) # thoi gian xuat hien vat pham tang toc' cho xe tang
 
 		self.count_power = 400
@@ -55,7 +55,7 @@ class OnePlayer(game_modes.GameMode):
 
 				self.all_sprite_list.add(enemy_obj)
 				self.all_sprite_list.add(snake_obj)
-				self.enemy_interval = random.randint(constant.ENEMY_MIN, constant.ENEMY_MAX)
+				self.enemy_interval = random.randint(constant.ENEMY_MIN, constant.ENEMY_MAX) - 100
 			else:
 				self.game.running_normal = False 
 
@@ -71,6 +71,10 @@ class OnePlayer(game_modes.GameMode):
 			# neu dan. cua dich. trung ta.
 			bullets_hit_list = pygame.sprite.spritecollide(self.player, enemy.bullets_sprite_list, False)
 			for bullet in bullets_hit_list:
+
+				if self.game.can_play_music:
+					self.game.music.play_music("player_hit")
+
 				ex_obj = game_items.Explosion(self.player)
 				self.explosions_sprite_list.add(ex_obj)
 				self.all_sprite_list.add(ex_obj)
@@ -95,6 +99,8 @@ class OnePlayer(game_modes.GameMode):
 		snake_list = pygame.sprite.spritecollide(self.player, self.snakes_sprite_list, False)
 		if self.player.can_hurt:
 			for snake in snake_list:
+				if self.game.can_play_music:
+					self.game.music.play_music("player_hit")
 				self.player.hp -= 1
 				self.player.can_hurt = False
 
@@ -136,12 +142,16 @@ class OnePlayer(game_modes.GameMode):
 		boss_list = pygame.sprite.spritecollide(self.player, self.boss_sprite_list_boss, False)
 		if self.player.can_hurt:
 			for boss in boss_list:
+				if self.game.can_play_music:
+					self.game.music.play_music("player_hit")
 				self.player.hp -= 1
 				self.player.can_hurt = False
 
 		# dung trung dan tru 1 diem va xoa dan 
 		bullet_list = pygame.sprite.spritecollide(self.player, self.bullet_sprite_list_boss, True)
 		for i in bullet_list:
+			if self.game.can_play_music:
+					self.game.music.play_music("player_hit")
 			self.player.hp -= 1
 
 	def update_sprites_boss(self):

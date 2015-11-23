@@ -84,6 +84,9 @@ class Menu():
 
 		self.can_play_music = True
 
+		self.ngoai = True
+		self.trong = False
+
 	def draw(self):
 		self.pos_click = (0, 0)
 		# do` event di chuyen chuot va click chuot
@@ -108,12 +111,34 @@ class Menu():
 		if self.state == "menu":
 			if self.sur_startgame_rect.collidepoint(self.pos): # neu ta re^ chuot vao chu~ "startgame"
 				self.image = self.menu[1]
+				if self.ngoai and not self.trong:
+					# phat nhac va gan' lai
+					self.ngoai = False
+					self.trong = True
+					if self.can_play_music:
+						self.game.music.play_music("mouse_hover")
+
 			elif self.sur_about_rect.collidepoint(self.pos):
 				self.image = self.menu[2]
+				if self.ngoai and not self.trong:
+					# phat nhac va gan' lai
+					self.ngoai = False
+					self.trong = True
+					if self.can_play_music:
+						self.game.music.play_music("mouse_hover")
 			elif self.sur_setting_rect.collidepoint(self.pos):
 				self.image = self.menu[3]
+				if self.ngoai and not self.trong:
+					# phat nhac va gan' lai
+					self.ngoai = False
+					self.trong = True
+					if self.can_play_music:
+						self.game.music.play_music("mouse_hover")
 			else:
 				self.image = self.menu[0]
+				# dat lai state 
+				self.ngoai = True
+				self.trong = False
 
 			if self.sur_startgame_rect.collidepoint(self.pos_click): # neu ta click chuot vao chu~ "startgame"
 				self.state = "player"
@@ -126,8 +151,17 @@ class Menu():
 		elif self.state == "about":
 			if self.sur_option_rect.collidepoint(self.pos):
 				self.image = self.option[1]
+				if self.ngoai and not self.trong:
+					# phat nhac va gan' lai
+					self.ngoai = False
+					self.trong = True
+					if self.can_play_music:
+						self.game.music.play_music("mouse_hover")
 			else:
 				self.image = self.option[0]
+				# dat lai state 
+				self.ngoai = True
+				self.trong = False
 
 			if self.sur_option_rect.collidepoint(self.pos_click):
 				self.state = "menu"
@@ -136,16 +170,46 @@ class Menu():
 			# neu click vao nut 
 			if self.sur_music_rect.collidepoint(self.pos) and self.can_play_music:
 				self.image = self.setting[2] # load hinh off nhac 
+				if self.ngoai and not self.trong:
+					# phat nhac va gan' lai
+					self.ngoai = False
+					self.trong = True
+					if self.can_play_music:
+						self.game.music.play_music("mouse_hover")
 			elif self.sur_music_rect.collidepoint(self.pos) and not self.can_play_music:
 				self.image = self.setting[0] #load hinh on nhac
+				if self.ngoai and not self.trong:
+					# phat nhac va gan' lai
+					self.ngoai = False
+					self.trong = True
+					if self.can_play_music:
+						self.game.music.play_music("mouse_hover")
 			elif self.can_play_music and self.sur_setting_rect.collidepoint(self.pos): # load hinh on nhac va re^ vao nut click
 				self.image = self.setting[1]
+				if self.ngoai and not self.trong:
+					# phat nhac va gan' lai
+					self.ngoai = False
+					self.trong = True
+					if self.can_play_music:
+						self.game.music.play_music("mouse_hover")
 			elif not self.can_play_music and self.sur_setting_rect.collidepoint(self.pos):
 				self.image = self.setting[3]
+				if self.ngoai and not self.trong:
+					# phat nhac va gan' lai
+					self.ngoai = False
+					self.trong = True
+					if self.can_play_music:
+						self.game.music.play_music("mouse_hover")
 			elif self.can_play_music:
 				self.image = self.setting[0]
+				# dat lai state 
+				self.ngoai = True
+				self.trong = False
 			elif not self.can_play_music:
 				self.image = self.setting[2]
+				# dat lai state 
+				self.ngoai = True
+				self.trong = False
 
 			if self.sur_music_rect.collidepoint(self.pos_click) and self.can_play_music:
 				self.can_play_music = False
@@ -157,12 +221,33 @@ class Menu():
 		elif self.state == "player":
 			if self.sur_player_1p_rect.collidepoint(self.pos):
 				self.image = self.player[1]
+				if self.ngoai and not self.trong:
+					# phat nhac va gan' lai
+					self.ngoai = False
+					self.trong = True
+					if self.can_play_music:
+						self.game.music.play_music("mouse_hover")
 			elif self.sur_player_2p_rect.collidepoint(self.pos):
 				self.image = self.player[2]
+				if self.ngoai and not self.trong:
+					# phat nhac va gan' lai
+					self.ngoai = False
+					self.trong = True
+					if self.can_play_music:
+						self.game.music.play_music("mouse_hover")
 			elif self.sur_player_back_rect.collidepoint(self.pos):
 				self.image = self.player[3]
+				if self.ngoai and not self.trong:
+					# phat nhac va gan' lai
+					self.ngoai = False
+					self.trong = True
+					if self.can_play_music:
+						self.game.music.play_music("mouse_hover")
 			else:
 				self.image = self.player[0]
+				# dat lai state 
+				self.ngoai = True
+				self.trong = False
 
 			if self.sur_player_1p_rect.collidepoint(self.pos_click):
 				self.game.is_one_player = True

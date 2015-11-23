@@ -47,7 +47,23 @@ class Game(ConnectionListener):
         
         self.is_one_player = False # xet xem 1 nguoi choi hay 2 nguoi choi
         self.is_two_player = False # xet xem 1 nguoi choi hay 2 nguoi choi
-        self.Connect()
+
+        self.music = Music()
+
+        #self.Connect()
+        address = raw_input("Address of Server: ")
+        try:
+            if not address:
+                host, port="localhost", 8000
+            else:
+                host,port=address.split(":")
+            self.Connect((host, int(port)))
+        except:
+            print "Error Connecting to Server"
+            print "Usage:", "host:port"
+            print "e.g.", "localhost:31425"
+            exit()
+        print "Boxes client started"
 
     # make menu game
     def menuGame(self):
@@ -61,17 +77,23 @@ class Game(ConnectionListener):
             self.clock.tick(constant.FPS)
 
         self.running_normal = True
+        self.can_play_music = self.bg_menu.can_play_music
 
+        if self.can_play_music:
+            pygame.mixer.music.load(constant.BACKGROUND_MUSIC)
+            pygame.mixer.music.play(-1, 0.0)
         if self.is_one_player:
             self.playGame(self.one_player)
         if self.is_two_player:
             self.waitingConnection()
 
-    # day la vong lap. tro` choi
+    # BINH THUONG - CHOI 1 NGUOI 
     def playGame(self, game):
-        self.can_play_music = self.bg_menu.can_play_music
-
+        first = True 
         while self.running_normal:
+            if first:
+                self.ready_go()
+                first = False
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running_normal = False
@@ -88,7 +110,7 @@ class Game(ConnectionListener):
         self.one_player.player.init_postition()
         self.playGameBoss(self.one_player)
 
-    # choi game voi boss
+    # BOSS - CHOI 1 NGUOI 
     def playGameBoss(self, game):
         while self.running_normal:
             for event in pygame.event.get():
@@ -102,9 +124,9 @@ class Game(ConnectionListener):
             game.update2()
             self.clock.tick(constant.FPS)
 
-    # vong lap cho` nguoi choi thu 2
+    # BINH THUONG - CHOI 2 NGUOI 
     def waitingConnection(self):
-
+        first = True 
         while self.running_normal:
             # listen server 
             connection.Pump()
@@ -129,6 +151,10 @@ class Game(ConnectionListener):
                 pygame.display.flip()
                 self.clock.tick(constant.FPS)
             else:# neu da~ tim duoc nguoi choi khac' thi choi game thoi
+                # nhay sang loop khac' xong return lai loop nay
+                if first:
+                    self.ready_go()
+                    first = False
                 self.two_player.update_network() # bat' dau vong lap cua game 
                 self.clock.tick(constant.FPS)
 
@@ -138,7 +164,7 @@ class Game(ConnectionListener):
         #self.two_player.player.init_postition()
         self.playGameBoss_2player(self.two_player)
 
-    # load man boss trong che do choi 2 nguoi 
+    # BOSS - CHOI 2 NGUOI 
     def playGameBoss_2player(self, game):
         # set lai vi tri cho nguoi choi
         self.two_player.player.init_postition()
@@ -160,6 +186,32 @@ class Game(ConnectionListener):
                         sys.exit()
 
             game.update_network_boss()
+            self.clock.tick(constant.FPS)
+
+    def ready_go(self):
+        running = True
+        count = 40
+        # load 2 text
+        ready = pygame.image.load(constant.IMAGE_TEXT_READY)
+        ready_rect = ready.get_rect()
+        ready_rect.centerx = int(constant.REAL_SCREEN_WIDTH / 2)
+        ready_rect.centery = int(constant.REAL_SCREEN_HEIGHT / 2)
+        go = pygame.image.load(constant.IMAGE_TEXT_GO)
+        go_rect = go.get_rect()
+        go_rect.centerx = int(constant.REAL_SCREEN_WIDTH / 2)
+        go_rect.centery = int(constant.REAL_SCREEN_HEIGHT / 2)
+        while running:
+            count -= 1
+            # dan background
+            self.real_screen.blit(self.two_player.image, (0, 0))
+            # dan text
+            if count >= 20:
+                self.real_screen.blit(ready, ready_rect)
+            else:
+                self.real_screen.blit(go, go_rect)
+            if count == 0:
+                running = False
+            pygame.display.flip()
             self.clock.tick(constant.FPS)
 
     # ham` lay' ID tu` server gan' cho client
@@ -218,11 +270,22 @@ class Game(ConnectionListener):
 
     def Network_Boss(self, data):
         # set lai vi tri cua cho x va y 
-        print str(data["x"]) + " va " + str(data["y"])
         self.two_player.boss_obj.set_state(data["x"], data["y"], data["die_x"], data["die_y"])
 
     def Network_BossHP(self, data):
         self.two_player.boss_obj.set_HP(data["hp"])
+
+class Music():
+    def __init__(self):
+        self.music = {
+            "mouse_hover" : pygame.mixer.Sound("./music/hoverbutton.wav"),
+            "shot" : pygame.mixer.Sound("./music/shot.wav"),
+            "boss_hit" : pygame.mixer.Sound("./music/boss_hit.wav"),
+            "player_hit" : pygame.mixer.Sound("music/arrr.wav")
+        }
+
+    def play_music(self, name):
+        self.music[name].play()
 
 if __name__ == "__main__":
     game = Game()

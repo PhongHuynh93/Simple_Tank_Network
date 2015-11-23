@@ -170,6 +170,8 @@ class Player1Tank(PlayerTank, pygame.sprite.Sprite):
 				self.one_player.background_x = -int(constant.SCREEN_WIDTH - constant.REAL_SCREEN_WIDTH)
 			self.rotate_image(self.facing, "e")
 		if keys[pygame.K_SPACE] and self.can_shoot:
+			if self.one_player.game.can_play_music:
+				self.one_player.game.music.play_music("shot")
 			self.can_shoot = False
 			self.shoot()
 
@@ -201,6 +203,8 @@ class Player1Tank(PlayerTank, pygame.sprite.Sprite):
 				self.one_player.background_x_boss = -int(constant.SCREEN_WIDTH_BOSS - constant.REAL_SCREEN_WIDTH)
 			self.rotate_image(self.facing, "e")
 		if keys[pygame.K_SPACE] and self.can_shoot:
+			if self.one_player.game.can_play_music:
+				self.one_player.game.music.play_music("shot")
 			self.can_shoot = False
 			self.shoot()
 
@@ -329,6 +333,8 @@ class Player2Tank(PlayerTank, pygame.sprite.Sprite):
 				self.one_player.background_x = -int(constant.SCREEN_WIDTH - constant.REAL_SCREEN_WIDTH)
 			self.rotate_image(self.facing, "e")
 		if keys[pygame.K_SPACE] and self.can_shoot:
+			if self.one_player.game.can_play_music:
+				self.one_player.game.music.play_music("shot")
 			self.can_shoot = False
 			self.shoot()
 
@@ -372,6 +378,8 @@ class Player2Tank(PlayerTank, pygame.sprite.Sprite):
 				self.one_player.background_x_boss = -int(constant.SCREEN_WIDTH_BOSS - constant.REAL_SCREEN_WIDTH)
 			self.rotate_image(self.facing, "e")
 		if keys[pygame.K_SPACE] and self.can_shoot:
+			if self.one_player.game.can_play_music:
+				self.one_player.game.music.play_music("shot")
 			self.can_shoot = False
 			self.shoot()
 

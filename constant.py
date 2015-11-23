@@ -107,3 +107,10 @@ MENU_PLAYER_IMAGE_2_PLAYER = "./image/Menu_tank/Menu13.png"
 MENU_PLAYER_IMAGE_BACK = "./image/Menu_tank/Menu14.png"
 # man hinh chon nguoi choi
 MENU_IMAGE_FIND_PARTNER = "./image/Menu_tank/Menu15.png"
+
+# text ready, go
+IMAGE_TEXT_READY = "./image/Text/text_ready.png"
+IMAGE_TEXT_GO = "./image/Text/text_go.png"
+
+# nhac
+BACKGROUND_MUSIC = "./music/bg.ogg"

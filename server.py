@@ -49,7 +49,7 @@ class TankServer(PodSixNet.Server.Server):
 		self.is_client_waiting = True # khi chi? co 1 nguoi choi 1 send True cho 1 client, khi 2 nguoi choi thi send False cho 2 client
 		self.map_normal = False
 		self.map_boss = False
-		self.enemy_number = 10
+		self.enemy_number = 1
 		self.boss_HP = 20
 
 	# goi khi co new cllient ket noi den server 
@@ -182,7 +182,13 @@ class Game():
 
 
 print "STARTING SERVER ON LOCAL HOST"
-tankServer = TankServer() # tao socket 
+# try:
+address = raw_input("Host:Port (localhost:8000): ")
+if not address:
+    host, port="localhost", 8000
+else:
+    host,port=address.split(":")
+tankServer = TankServer(localaddr=(host, int(port))) # tao socket dua. vao IP va Port ta nhap vao 
 
 power_interval = random.randint(constant.HEALTH_MIN, constant.HEALTH_MAX) # thoi gian xuat hien vat pham tang toc' cho xe tang
 enemy_interval = random.randint(constant.ENEMY_MIN, constant.ENEMY_MAX) 

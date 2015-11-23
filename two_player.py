@@ -18,6 +18,9 @@ class TwoPlayer(game_modes.GameMode):
 
 		self.first_boss = True
 
+		self.count_boss_hurt = 100
+		self.boss_hurt = True
+
 		self.add_player()
 
 	def add_player(self):
@@ -45,11 +48,15 @@ class TwoPlayer(game_modes.GameMode):
 				self.player.is_power = False
 				self.count_power = 400
 
+		
+
+		"""
 		if self.player_network.is_power:
 			self.count_power_2 -= 1
 			if self.count_power_2 <= 0:
 				self.player_network.is_power = False
 				self.count_power_2 = 400
+		"""
 
 	def make_power_box(self, x, y):
 		item_obj = game_items.PowerBox(self.screen)
@@ -80,6 +87,8 @@ class TwoPlayer(game_modes.GameMode):
 			# neu dan. cua dich. trung ta.
 			bullets_hit_list = pygame.sprite.spritecollide(self.player, enemy.bullets_sprite_list, False)
 			for bullet in bullets_hit_list:
+				if self.game.can_play_music:
+					self.game.music.play_music("player_hit")
 				ex_obj = game_items.Explosion(self.player)
 				self.explosions_sprite_list.add(ex_obj)
 				self.all_sprite_list.add(ex_obj)
@@ -120,6 +129,8 @@ class TwoPlayer(game_modes.GameMode):
 		snake_list = pygame.sprite.spritecollide(self.player, self.snakes_sprite_list, False)
 		if self.player.can_hurt:
 			for snake in snake_list:
+				if self.game.can_play_music:
+					self.game.music.play_music("player_hit")
 				self.player.hp -= 1
 				self.player.can_hurt = False
 
@@ -145,7 +156,18 @@ class TwoPlayer(game_modes.GameMode):
 	# Boss
 	####################################################################################
 	def generate_game_items_boss_2(self):
-		x = 0
+		# thoi` gian dc huong? che' do. ban' nhanh , muc. dich' xoa' ban' nhanh trong man` boss 
+		if self.player.is_power:
+			self.count_power -= 1
+			if self.count_power <= 0:
+				self.player.is_power = False
+				self.count_power = 400
+
+		if not self.boss_hurt:
+			self.count_boss_hurt -= 1
+			if self.count_boss_hurt <= 0:
+				self.boss_hurt = True
+				self.count_boss_hurt = 400 
 
 	def handle_collisions_boss_2(self):
 		# het' mau thi` xoa' nhan vat, xoa boss
@@ -169,6 +191,8 @@ class TwoPlayer(game_modes.GameMode):
 		boss_list = pygame.sprite.spritecollide(self.player, self.boss_sprite_list_boss, False)
 		if self.player.can_hurt:
 			for boss in boss_list:
+				if self.game.can_play_music:
+					self.game.music.play_music("player_hit")
 				self.player.hp -= 1
 				self.player.can_hurt = False
 
@@ -176,14 +200,19 @@ class TwoPlayer(game_modes.GameMode):
 		# dung trung dan cua? boss tru 1 diem va xoa dan 
 		bullet_list = pygame.sprite.spritecollide(self.player, self.bullet_sprite_list_boss, True)
 		for i in bullet_list:
+			if self.game.can_play_music:
+					self.game.music.play_music("player_hit")
 			self.player.hp -= 1
 
 		# neu' dan. cua ta trung' boss thi` tru mau' boss 
-		for bullet in self.player.bullets_sprite_list:
-			bullet_list = pygame.sprite.spritecollide(bullet, self.boss_sprite_list_boss, False)
+		for boss in self.boss_sprite_list_boss:
+			bullet_list = pygame.sprite.spritecollide(boss, self.player.bullets_sprite_list, True)
 			for i in bullet_list:
-				# send cho server de? no tru` hp cho boss 
-				self.game.Send({"action" : "BossHP", "id" : self.game.index_player})
+				if self.boss_hurt:
+					print "so lan boss bi thuong khi trung 1 vien dan "
+					# send cho server de? no tru` hp cho boss 
+					self.boss_hurt = False
+					self.game.Send({"action" : "BossHP", "id" : self.game.index_player})
 
 		# gui? HP cho server de? no' send cho client kia 
 		self.game.Send({"action" : "HP", "hp" : self.player.hp, "id" : self.game.index_player})
