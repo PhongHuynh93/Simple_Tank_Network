@@ -6,6 +6,7 @@ Di chuyển: nhấn wsad
 Bắn đạn: nhấn Space
 
 Cách chạy 2 người chơi qua LAN:
+
 1. Chạy server.py bằng command line  
 
 + Nếu ta muốn chạy 2 client trên cùng 1 máy thì ta gõ vào command line dạng: localhost:port --> ví dụ như localhost:3000 
