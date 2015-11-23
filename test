@@ -1,0 +1,23 @@
+import pygame
+import sys
+
+def rotate45(gameObject, rotations={}):
+    r = rotations.get(gameObject,0) + 1
+    rotations[gameObject] = r
+    return pygame.transform.rotate(gameObject, r)
+
+
+pygame.init()
+screen = pygame.display.set_mode((800,600))
+Tardis = pygame.image.load("./image/Tanks/tankRed.png").convert_alpha()
+clock = pygame.time.Clock()
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            sys.exit()
+    screen.fill( (0,0,0) )
+    rotatedTardis = rotate45(Tardis)
+    screen.blit(rotatedTardis, (400,300))
+    clock.tick(30)
+    pygame.display.update()
+    

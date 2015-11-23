@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="sheet_tanks" tilewidth="32" tileheight="32" tilecount="512">
+  <image source="../../../Downloads/Kenney_topdownTanks/Spritesheet/sheet_tanks.png" width="1024" height="512"/>
+ </tileset>
+ <tileset firstgid="513" name="treeLarge" tilewidth="98" tileheight="107" tilecount="1">
+  <image source="../../../Downloads/Kenney_topdownTanks/PNG/Environment/treeLarge.png" width="98" height="107"/>
+ </tileset>
+ <tileset firstgid="514" name="treeSmall" tilewidth="87" tileheight="87" tilecount="1">
+  <image source="../../../Downloads/Kenney_topdownTanks/PNG/Environment/treeSmall.png" width="87" height="87"/>
+ </tileset>
+ <layer name="Background" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1LERg1AMBNGPoREbGgHciA3918DFqmA1s8EFTyGwTGOMVzZnSzY1cb2/s0+2Zlsj1/ueHdmZfRu53n/ZP7uyu5HrnfK924d9EGwfLNsHy/bBsn2wbB8s2wfL9sGyfbBsHyzbB8v2wbJ9sGwfLNsHy/bBsn2wbB8s2wfL9sFyvVOer+/D/xXB9f4ANeLgVg==
+  </data>
+ </layer>
+ <layer name="Foreground" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmd1twzAMhK0mi/RnkbZZpE0WcdpF8rNI2i7itoPkDqAAP+TBMkjJIvQBB+beHBgnknIIXXcHraA1FCZ6spaqxR76gD6hPtHf41keoEfoKaR5bY7QCTpDh0T/jOd5gV6hTZjuyUbxv1ykfkM/4r8S/Bue5R3aQrswzUd2yu/kF/qD/qEh0U/Nwy2vjYd8pOZBKx/Ra5KSB418jL0Wg9Tc+bBgLzVXPkj0mpTKhyYXqbnzQbTz4aV/kNY/ljFfkVL9Q5NBaon+Ufv+QSzyQXLmg2j3D1IiH8TD/mFF7v5BNOer1Dy0fNjPVyRnPqwotZ9r5yNS8/5BPOznxEP/6KXW3j+Ih/2ceMjHINXDfl5i/7Ci7efz5ysLPOSD1J6Pg9TWP5Zxf0Xa/W6br7x8/6h5/+g6u/28H/2u+X6XHKXOycdS7ttLvA+L71ERq/OKjM8ny3mXeOjnkTnn1RVX7ZLt
+  </data>
+ </layer>
+ <layer name="Tree" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmUsOgCAMRIHTef8TGWOIv420lbT1vZ2Jn850RIFSAK605vNef8bKx0o/Hki89Zzrr2vTZKjXNlJjP/f8XK3GbO+B1A8vOfZShxXZ9IBvyBtsZMqBRMtS7euAXLmCne0fOEJfWY84uNd/P44+r/mi19F7Dv6oZMsNVj2glzbM9DFDz2ZomOUT4yIAzCTDWDOqQaPZo19NuBbx9nuj3W8EOzTz8vM1UdavIpDJR42WFTV0AS8=
+  </data>
+ </layer>
+</map>

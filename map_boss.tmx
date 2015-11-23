@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32" tilecount="16">
+  <image source="image/Environment/grass.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="17" name="treeLarge" tilewidth="98" tileheight="107" tilecount="1">
+  <image source="image/Environment/treeLarge.png" width="98" height="107"/>
+ </tileset>
+ <tileset firstgid="18" name="treeSmall" tilewidth="87" tileheight="87" tilecount="1">
+  <image source="image/Environment/treeSmall.png" width="87" height="87"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztlbkRwzAQxChLtj7r6b9abcwGhJtBgADJRQtyaK19whimMBT1b/iFOSyFfQ1b2MO/sB/hDFe4Cztl3/ZhH0Sn7Ns+7IPolH3bh30QnbLvN/vob1bto79ZtY/+ZtU++ptV+yA55f33//D/IDpl3/ZhH0Sn7Ns+7IPolH3bh30QnbJv+7APolP2bR/2QXTKvu3DPoj+AEiwUQ8=
+  </data>
+ </layer>
+ <layer name="Tree" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1jEOgCAMhWGuIPc/rINxMZAQpfa1/b/FxaHwWqA1qDm8C8AvduZs0TP0oS32d657FzChWpcC+jkHcoylP76r7pzVzzT1+rxVmddo64zUt9H2tgrLHqqS+df7EYA95q0Oso71PhxZqZ+cYyDLy9u3InRU6FNo2t17O86hbGdZtvXAjtJdoFLLyvzM/sk+eyd4LwLg
+  </data>
+ </layer>
+</map>
