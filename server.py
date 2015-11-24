@@ -49,7 +49,7 @@ class TankServer(PodSixNet.Server.Server):
 		self.is_client_waiting = True # khi chi? co 1 nguoi choi 1 send True cho 1 client, khi 2 nguoi choi thi send False cho 2 client
 		self.map_normal = False
 		self.map_boss = False
-		self.enemy_number = 1
+		self.enemy_number = 10
 		self.boss_HP = 20
 
 	# goi khi co new cllient ket noi den server 
